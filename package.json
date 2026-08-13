@@ -6,7 +6,7 @@
   "description": "Plataforma didática de estudos de Angular e TypeScript",
   "scripts": {
     "build": "tsc",
-    "dev": "npm run build && python3 -m http.server 4173",
+    "dev": "npm run build && python -m http.server 4173",
     "test": "npm run build && npm run audit:examples",
     "audit:examples": "node scripts/audit-examples.mjs"
   },
