@@ -1,25 +1,24 @@
-import { dedicatedExamples } from '../dist/lesson-examples.js';
+import { courseContent } from '../dist/content/index.js';
 import { lessons } from '../dist/data.js';
 
-const guidedInMain = new Set([
-  'ts-intro', 'types', 'functions', 'interfaces', 'classes', 'generics',
-  'components', 'binding', 'inputs-outputs', 'services', 'routing', 'http',
-  'rxjs', 'signals',
-]);
-
-const missing = lessons.filter(({ id }) => !guidedInMain.has(id) && !dedicatedExamples[id]);
-if (missing.length) {
-  throw new Error(`Aulas sem exemplo próprio: ${missing.map(({ id }) => id).join(', ')}`);
-}
-
-const snippets = new Map();
-for (const [id, example] of Object.entries(dedicatedExamples)) {
-  for (const [kind, code] of Object.entries({ minimum: example.minimum, real: example.real })) {
-    const normalized = code.replace(/\s+/g, ' ').trim();
-    const previous = snippets.get(normalized);
-    if (previous) throw new Error(`Exemplo duplicado: ${previous} e ${id}:${kind}`);
-    snippets.set(normalized, `${id}:${kind}`);
+const seen = new Map();
+let count = 0;
+for (const lesson of lessons) {
+  const content = courseContent[lesson.id];
+  if (!content) throw new Error(`Aula sem conteúdo: ${lesson.id}`);
+  const local = new Map();
+  for (const [index, section] of content.sections.entries()) {
+    for (const field of ['code', 'solution']) {
+      const snippet = section[field]?.replace(/\s+/g, ' ').trim();
+      if (!snippet || snippet.length < 20) continue;
+      count++;
+      if (local.has(snippet)) throw new Error(`Snippet repetido na aula ${lesson.id}: seções ${local.get(snippet)} e ${index}`);
+      local.set(snippet, index);
+      const previous = seen.get(snippet);
+      if (previous) throw new Error(`Snippet duplicado entre aulas: ${previous} e ${lesson.id}:${index}:${field}`);
+      seen.set(snippet, `${lesson.id}:${index}:${field}`);
+    }
   }
 }
 
-console.log(`Auditoria aprovada: ${lessons.length} aulas possuem conteúdo dedicado; ${snippets.size} exemplos catalogados são únicos.`);
+console.log(`Auditoria de exemplos aprovada: ${lessons.length} aulas e ${count} snippets pedagógicos únicos.`);

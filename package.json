@@ -7,8 +7,9 @@
   "scripts": {
     "build": "tsc",
     "dev": "npm run build && python -m http.server 4173",
-    "test": "npm run build && npm run audit:examples",
-    "audit:examples": "node scripts/audit-examples.mjs"
+    "test": "npm run build && npm run audit:examples && npm run audit:content",
+    "audit:examples": "node scripts/audit-examples.mjs",
+    "audit:content": "node scripts/audit-content.mjs"
   },
   "devDependencies": {
     "typescript": "^5.7.3"
