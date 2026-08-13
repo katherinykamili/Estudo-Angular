@@ -1,0 +1,59 @@
+import { Lesson, Module, Quiz } from './types.js';
+
+export const modules: Module[] = [
+  { id: 0, label: 'Preparação', title: 'Preparação para o curso', color: 'sky' },
+  { id: 1, label: 'TypeScript', title: 'Fundamentos de TypeScript', color: 'ts' },
+  { id: 2, label: 'TypeScript', title: 'TypeScript intermediário', color: 'ts' },
+  { id: 3, label: 'TypeScript', title: 'TypeScript avançado', color: 'purple' },
+  { id: 4, label: 'Angular', title: 'Introdução ao Angular', color: 'angular' },
+  { id: 5, label: 'Angular', title: 'Componentes e comunicação', color: 'angular' },
+  { id: 6, label: 'Angular', title: 'Templates e diretivas', color: 'angular' },
+  { id: 7, label: 'Angular', title: 'Services e Routing', color: 'angular' },
+  { id: 8, label: 'Angular', title: 'Forms, HTTP e APIs', color: 'angular' },
+  { id: 9, label: 'Avançado', title: 'RxJS, Signals e lifecycle', color: 'purple' },
+  { id: 10, label: 'Profissional', title: 'Arquitetura e carreira', color: 'orange' },
+];
+
+const lesson = (id: string, module: number, title: string, level: Lesson['level'], duration: string, summary: string, topics: string[], project = false): Lesson => ({
+  id, module, moduleTitle: modules.find((item) => item.id === module)?.title ?? '', title, level, duration, summary, topics, project,
+});
+
+export const lessons: Lesson[] = [
+  lesson('web', 0, 'Como a web funciona', 'Iniciante', '28 min', 'Entenda navegador, servidor, HTML, CSS e JavaScript antes de escrever sua primeira linha.', ['cliente e servidor', 'HTTP', 'HTML, CSS e JavaScript']),
+  lesson('setup', 0, 'Seu ambiente profissional', 'Iniciante', '35 min', 'Configure Node.js, npm, terminal, VS Code e Git para trabalhar com confiança.', ['Node.js', 'npm', 'terminal', 'Git básico']),
+  lesson('ts-intro', 1, 'JavaScript x TypeScript', 'Iniciante', '42 min', 'Descubra como a tipagem ajuda a encontrar erros antes que cheguem ao navegador.', ['tipagem estática', 'inferência', 'compilação']),
+  lesson('types', 1, 'Tipos, arrays e objetos', 'Básico', '55 min', 'Modele dados reais com string, number, boolean, arrays, tuplas e objetos.', ['string', 'number', 'boolean', 'arrays', 'tuplas', 'objects']),
+  lesson('functions', 1, 'Funções que comunicam intenção', 'Básico', '48 min', 'Use parâmetros, retornos, valores padrão, condicionais e loops com segurança.', ['funções', 'retorno', 'opcionais', 'condicionais']),
+  lesson('unions', 1, 'Unions, aliases e enums', 'Básico', '40 min', 'Represente estados possíveis sem perder a proteção do compilador.', ['union types', 'literal types', 'type aliases', 'enums']),
+  lesson('interfaces', 2, 'Interfaces e modelagem', 'Intermediário', '52 min', 'Defina contratos de dados legíveis para a sua aplicação.', ['interfaces', 'type x interface', 'readonly', 'optional properties']),
+  lesson('classes', 2, 'Classes e encapsulamento', 'Intermediário', '55 min', 'Conheça construtores, visibilidade, herança e abstração sem exagerar na orientação a objetos.', ['classes', 'private', 'protected', 'getters', 'static']),
+  lesson('narrowing', 2, 'Narrowing e type guards', 'Intermediário', '44 min', 'Faça o TypeScript entender qual formato de dado existe em cada fluxo.', ['narrowing', 'guards', 'intersections']),
+  lesson('generics', 3, 'Generics para código reutilizável', 'Avançado', '58 min', 'Crie funções, interfaces e classes reutilizáveis preservando os tipos.', ['generics', 'constraints', 'generic interfaces']),
+  lesson('advanced-types', 3, 'Tipos avançados na prática', 'Avançado', '62 min', 'Use keyof, mapped types, conditional types e utility types para modelar APIs.', ['keyof', 'typeof', 'Pick', 'Omit', 'Record', 'Partial']),
+  lesson('async', 3, 'Assincronismo e erros', 'Avançado', '48 min', 'Trabalhe com Promises, async/await e falhas previsíveis antes de consumir APIs.', ['Promises', 'async/await', 'try/catch', 'módulos']),
+  lesson('todo-project', 3, 'Projeto: tarefas tipadas', 'Intermediário', '90 min', 'Construa um sistema de tarefas que prepara a modelagem usada no Angular.', ['interfaces', 'estado', 'filtros', 'persistência'], true),
+  lesson('angular-intro', 4, 'O que é Angular?', 'Básico', '46 min', 'Veja como componentes, templates e injeção de dependência se unem em uma aplicação Angular.', ['arquitetura', 'CLI', 'bootstrap', 'standalone components']),
+  lesson('angular-structure', 4, 'Anatomia de um projeto Angular', 'Básico', '38 min', 'Navegue pela estrutura criada pela CLI e aprenda onde cada responsabilidade vive.', ['src', 'main.ts', 'component', 'metadata']),
+  lesson('components', 5, 'Componentes reutilizáveis', 'Básico', '58 min', 'Crie componentes pequenos, coesos e fáceis de reaproveitar.', ['selector', 'template', 'styles', 'composição']),
+  lesson('inputs-outputs', 5, 'Inputs, outputs e eventos', 'Intermediário', '52 min', 'Construa comunicação explícita entre componentes pai e filho.', ['input', 'output', 'events', 'componentização']),
+  lesson('product-project', 5, 'Projeto: Card de Produto', 'Intermediário', '80 min', 'Transforme um contrato TypeScript em um card acessível e reutilizável.', ['Produto', 'input', 'output', 'acessibilidade'], true),
+  lesson('binding', 6, 'Data binding sem mistério', 'Básico', '55 min', 'Conecte estado e template com interpolação, property binding e eventos.', ['interpolação', 'property binding', 'event binding', 'two-way binding']),
+  lesson('control-flow', 6, 'Listas, condições e diretivas', 'Intermediário', '50 min', 'Renderize interfaces previsíveis com o controle de fluxo moderno e diretivas.', ['@if', '@for', 'track', 'diretivas']),
+  lesson('services', 7, 'Services e dependency injection', 'Intermediário', '55 min', 'Centralize regras e acesso a dados usando serviços injetáveis.', ['services', 'providers', 'dependency injection', 'estado compartilhado']),
+  lesson('routing', 7, 'Routing profissional', 'Intermediário', '65 min', 'Modele rotas, parâmetros, página 404, guards e lazy loading.', ['Router', 'routerLink', 'params', 'guards', 'lazy loading']),
+  lesson('forms', 8, 'Reactive Forms acessíveis', 'Intermediário', '70 min', 'Crie formulários com validação, mensagens claras e estado previsível.', ['FormControl', 'FormGroup', 'Validators', 'acessibilidade']),
+  lesson('http', 8, 'HTTP, APIs e CRUD', 'Intermediário', '72 min', 'Consuma uma API tipada com loading, erros, interceptors e operações CRUD.', ['HttpClient', 'REST', 'interceptors', 'loading', 'erros']),
+  lesson('rxjs', 9, 'RxJS no mundo real', 'Avançado', '80 min', 'Entenda fluxos de eventos e escolha operadores como switchMap com intenção.', ['Observable', 'pipe', 'switchMap', 'catchError', 'Subject']),
+  lesson('signals', 9, 'Signals e estado derivado', 'Avançado', '65 min', 'Use signal, computed e effect para modelar estado local de forma moderna.', ['signal', 'computed', 'effect', 'RxJS x Signals']),
+  lesson('lifecycle', 9, 'Lifecycle, pipes e renderização', 'Avançado', '52 min', 'Saiba quando o Angular cria, verifica e destrói componentes — e o impacto disso.', ['hooks', 'pipes', 'change detection', 'performance']),
+  lesson('architecture', 10, 'Arquitetura Angular escalável', 'Profissional', '68 min', 'Organize features, core, shared, páginas e serviços por responsabilidade.', ['feature-based', 'smart/presentational', 'core', 'shared']),
+  lesson('auth', 10, 'Autenticação e autorização', 'Profissional', '58 min', 'Implemente a experiência de login com guards e interceptors sem confundir front-end com segurança real.', ['token', 'guards', 'interceptors', 'sessão']),
+  lesson('quality', 10, 'Performance, testes e code review', 'Profissional', '74 min', 'Feche a trilha com otimização, testes de comportamento e revisão de código.', ['testes', 'mocks', 'lazy loading', 'a11y', 'Clean Code']),
+  lesson('final-project', 10, 'Projeto final: painel administrativo', 'Profissional', '180 min', 'Reúna autenticação, rotas, CRUD, formulários, API, estados e uma arquitetura de portfólio.', ['dashboard', 'CRUD', 'auth', 'API', 'Signals/RxJS'], true),
+];
+
+export const quizzes: Record<number, Quiz> = {
+  1: { question: 'Qual é a principal vantagem do TypeScript?', options: ['Substituir HTML', 'Adicionar tipagem e ferramentas ao JavaScript', 'Criar bancos de dados', 'Tornar CSS obrigatório'], answer: 1, explanation: 'TypeScript preserva o JavaScript e acrescenta análise estática, autocompletar e contratos de dados.' },
+  4: { question: 'Qual é a menor unidade reutilizável de interface no Angular?', options: ['Service', 'Componente', 'Rota', 'Interceptor'], answer: 1, explanation: 'Componentes unem uma classe, um template e estilos para representar uma parte da interface.' },
+  9: { question: 'Quando switchMap é especialmente útil?', options: ['Para manter todas as requisições antigas', 'Para buscar enquanto o usuário digita e cancelar resultados obsoletos', 'Para criar CSS', 'Para declarar uma interface'], answer: 1, explanation: 'switchMap troca o fluxo anterior pelo mais recente, ideal para buscas reativas.' },
+};
